@@ -1,0 +1,109 @@
+<a class="nav-link float" href="/cart">
+    <i class="fa fa-shopping-bag"></i>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+        {{count}}
+        <span class="visually-hidden">unread messages</span>
+    </span>
+</a>
+
+<div class="container p-4">
+
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                {{!-- <img src="{{detailImage}}" class="img-fluid rounded-start" alt="..."> --}}
+                <img class="img-fluid rounded-start" src="{{detail.PRODUCTO_URL}}" />
+                <div class="card-body text-center">
+                    <div class="row">
+                        <div class="sliderGallery">
+
+                            <div class="slidesGallery ">
+                                {{#each gallery}}
+                                <div>
+                                    <a href="#myimgModal{{@index}}" data-bs-toggle="modal"
+                                        data-bs-target="#myimgModal{{@index}}">
+                                        <img src="{{GALERIA_URL}}" class="img-fluid rounded" width="100" height="150" />
+                                    </a>
+                                </div>
+                                {{/each}}
+                            </div>
+
+                            {{#each gallery}}
+                            <div class="modal fade" id="myimgModal{{@index}}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            <img class="img-fluid rounded-start" src="{{GALERIA_URL}}" />
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+
+                    <div class="btn-toolbar justify-content-between" role="toolbar"
+                        aria-label="Toolbar with button groups">
+                        <div>
+                            <h3 class="card-title">{{detail.PRODUCTO_NOMBRE}}</h3>
+                        </div>
+                        <div class="input-group">
+                            <form action="/shop" method="POST">
+                                <input type="hidden" name="PRODUCTO_ID" value="{{detail.PRODUCTO_ID}}">
+                                <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <p class="card-text"><small class="text-muted">Fecha: {{feachaAlta}}</small></p>
+                    <hr>
+                    <p class="card-text"><b>Talla:</b></p>
+                    <p class="card-text">{{detail.TALLA_NOMBRE}}</p>
+                    <hr>
+                    <p class="card-text"><b>Medida:</b></p>
+                    <p class="card-text">{{detail.PRODUCTO_MEDIDAS}}</p>
+                    <hr>
+                    <p class="card-text">{{detail.PRODUCTO_DESCRIPCION}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-4">
+        <div class="card">
+            <div class="card-body shadow-sm bg-dark">
+                <h4>
+                    <span class="badge textPurple">Comentarios ( {{commentCount}} ) :</span>
+                </h4>
+            </div>
+            {{#if comments}}
+            {{#each comments}}
+            <div class="card-body">
+                {{PERSONA_NOMBRE}}:
+            </div>
+            <div class="card-body shadow-sm">
+                {{COMENTARIO_DESCRIPCION}}
+            </div>
+            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+
+</div>

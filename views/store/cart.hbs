@@ -1,0 +1,190 @@
+<div class="container p-4">
+    <div class="row">
+        {{#if products}}
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="mx-auto">
+
+                                <table class="table caption-top">
+                                    <caption>Lista de Productos Agregados al Carrito</caption>
+                                    <thead class="text-center table-secondary">
+                                        <tr class="card-title text-uppercase">
+                                            <td>Imagen</td>
+                                            <td>Nombre</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Talla</td>
+                                            <td>Eliminar</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        {{#each products}}
+                                        <tr>
+                                            <td class="text-center">
+                                                <div class="col-md-8">
+                                                    <img src="{{PRODUCTO_URL}}" class="card-img-top" width="20px"
+                                                        height="100px">
+                                                </div>
+                                            </td>
+                                            <td>{{PRODUCTO_NOMBRE}}</td>
+                                            <td>$ {{PRECIO_UNITARIO}}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <form action="/cart/min" method="POST">
+                                                        <input type="hidden" name="PRODUCTO_ID" value="{{PRODUCTO_ID}}">
+                                                        <button type="submit" class="btn btn-danger btn-sm">-</button>
+                                                    </form>
+                                                    <a href="#" class="btn btn-light btn-sm" data-toggle="modal">
+                                                        {{PRODUCTO_CANTIDAD}}</a>
+
+                                                    <form action="/cart/max" method="POST">
+                                                        <input type="hidden" name="PRODUCTO_ID" value="{{PRODUCTO_ID}}">
+                                                        <button type="submit" class="btn btn-success btn-sm">+</button>
+                                                    </form>
+
+                                                </div>
+                                            </td>
+                                            <td>{{TALLA_NOMBRE}}</td>
+                                            <td>
+                                                <form action="/cart" method="POST">
+                                                    <input type="hidden" name="PRODUCTO_ID" value="{{PRODUCTO_ID}}">
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                    <tfoot class="text-center">
+                                        <td>TOTAL: </td>
+                                        <td class="table-success text-center">
+                                            $ {{totalPrice}}
+                                        </td>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="card">
+                    <div class="card-header text-uppercase text-center">
+                        Acciones
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-3">
+                            {{!-- Button trigger modal (Comprar) --}}
+                            <div class="d-grid gap-3">
+                                {{!-- <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                    data-bs-target="#buyModal">
+                                    <i class="fal fa-shopping-cart"> Comprar</i>
+                                </button> --}}
+                                <form action="/cart/checkout" method="post">
+                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="pk_test_51JnQDrEcCS5fMXbfZZDcSdQntJs42RQT0p7W6HLEqH40KzEyv9uOBOZZME5yKSvlliZYFwz6ffTdVODuDNqzXpwK00L0gGTgSA"
+                                        data-amount={{totalPrice}} data-name="Pago Ropa" data-description="PagoRopa"
+                                        data-image="../img/logo.png" data-locale="auto">
+                                        </script>
+                                    <script>
+                                        document.getElementsByClassName('stripe-button-el')[0].style.display = 'none'
+                                    </script>
+                                    <button class="btn btn-outline-success">
+                                        Comprar
+                                    </button>
+                                </form>
+
+                            </div>
+
+                            {{!-- Button trigger modal (Cancelar Pedido) --}}
+                            <div class="d-grid gap-3">
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#cancelModal">
+                                    <i class="far fa-window-close"> Cancelar Pedido</i>
+                                </button>
+                            </div>
+
+                            <div class="d-grid gap-3">
+                                <a href="/shop" class="btn btn-outline-primary" type="submit">Seguir Comprando</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3>No tienes nada agregado al carrito</h3>
+                        <a href="/shop" class="btn btn-primary m-4">
+                            Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Modal (Comprar) -->
+        {{!-- <div class="modal fade" id="buyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-success" id="staticBackdropLabel">
+                            <i class="fal fa-check-circle"> Realizar Pedido</i>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Esta seguro que desea realizar el pedido?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <form action="/cart/buy" method="POST">
+                            <div class="d-grid gap-3">
+                                <input type="hidden" name="PAGO_ID" id="tipoPago" value="">
+                                <button type="submit" class="btn btn-success">Aceptar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <!-- Modal (Cancelar Pedido) -->
+        <div class="modal fade" id="cancelModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="staticBackdropLabel">
+                            <i class="fal fa-times-circle"> Cancelar Pedido</i>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estas seguro que sea cancelar su pedido?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <form action="/cart/delete" method="POST">
+                            <div class="d-grid gap-3">
+                                <button type="submit" class="btn btn-danger">Aceptar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

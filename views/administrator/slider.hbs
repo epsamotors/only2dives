@@ -1,0 +1,136 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-lg-9">
+            <div class="panel panel-default">
+
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <table class="table caption-top">
+                            <caption>Lista Slider</caption>
+                            <thead class="text-center table-secondary">
+                                <tr class="card-title text-uppercase">
+                                    <td>Imagen</td>
+                                    <td>Actualizar</td>
+                                    <td>Eliminar</td>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                {{#each slider}}
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <img src="{{SLIDER_URL}}" class="card-img-top" width="20px"
+                                                    height="100px">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#myAddImage{{@index}}">
+                                            Actualizar
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <a href="/administrator/deleteSlider/{{SLIDER_ID}}"
+                                            class="btn btn-outline-danger">Eliminar</a>
+                                    </td>
+                                </tr>
+
+                                <div class="modal fade" id="myAddImage{{@index}}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+
+                                                <form action="/administrator/editSlider/{{SLIDER_ID}}" method="POST"
+                                                    enctype="multipart/form-data">
+
+                                                    <div class="mb-3">
+                                                        <input type="file" accept="image/*" name="SUBIR_IMAGEN"
+                                                            class="form-control" onchange="loadFile(event)">
+                                                    </div>
+
+                                                    <div class="col-12 text-center">
+                                                        <button class="btn btn-success">
+                                                            Guardar
+                                                        </button>
+                                                        <a href="/administrator/slider"
+                                                            class="btn btn-danger">Cancelar</a>
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="card">
+                    <div class="card-body text-secondary">
+                        <div class="d-grid gap-3">
+                            <a class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                                Agregar Imagen
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="categoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-success" id="staticBackdropLabel">
+                            <i class="fal fa-check-circle"> Agregar nueva imagen</i>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/administrator/addSlider" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="PRODUCTO_ID" value={{PRODUCTO_ID}}>
+
+                            <div class="mb-3">
+                                <input type="file" accept="image/*" name="SUBIR_IMAGEN" class="form-control"
+                                    onchange="loadFile(event)">
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success">
+                                    Guardar
+                                </button>
+                                <a href="/administrator" class="btn btn-danger">Cancelar</a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
