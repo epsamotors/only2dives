@@ -86,7 +86,7 @@
                                     data-bs-target="#buyModal">
                                     <i class="fal fa-shopping-cart"> Comprar</i>
                                 </button> --}}
-                                <form action="/cart/checkout" method="post">
+                                <form action="/cart/buy" method="post">
                                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                         data-key="pk_test_51JnQDrEcCS5fMXbfZZDcSdQntJs42RQT0p7W6HLEqH40KzEyv9uOBOZZME5yKSvlliZYFwz6ffTdVODuDNqzXpwK00L0gGTgSA"
                                         data-amount={{totalPrice}} data-name="Pago Ropa" data-description="PagoRopa"
@@ -133,8 +133,10 @@
         </div>
         {{/if}}
 
+        {{!-- --}}
+        {{!-- --}}
         <!-- Modal (Comprar) -->
-        {{!-- <div class="modal fade" id="buyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="buyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -158,7 +160,9 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
+        {{!-- --}}
+        {{!-- --}}
 
         <!-- Modal (Cancelar Pedido) -->
         <div class="modal fade" id="cancelModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

@@ -1,146 +1,54 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<header class="color_bg text-white">
     <div class="container">
 
-        <a class="navbar-brand" href="/"><img src="../img/logo.png" class="pricing rounded-circle" alt=""
-                width="110" /></a>
+        <div class="nav-contet">
+            <a href="/shop" class="navbar-brand">
+                <img src="../img/logo.png" class="logo-home" alt="Logo" />
+            </a>
+            <div class="col">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-
-            <ul class="navbar-nav ms-auto">{{!-- me-auto (right) -- ms-auto (left) --}}
-
-                {{#if user}}
-
-                {{!-- <li class="nav-item">
-                    <a class="nav-link" href="/shop">
-                        <i class="fal fa-cart-arrow-down"></i>
-                    </a>
-                </li> --}}
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        {{user.PERSONA_NOMBRE}}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal">
-                                <i class="fa fa-user"> Actualizar Perfil</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/profile">
-                                <i class="fal fa-clipboard-list"> Mi galleria</i>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/logout">
-                                <i class="fal fa-sign-out"> Salir</i></a>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                {{#if admin}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/administrator">
-                        <i class="fa fa-user">Administrar</i>
-                    </a>
-                </li>
-                {{else}}
-
-                {{/if}}
-
-
-                {{else}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/shop">
-                        <i class="fal fa-cart-arrow-down"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        <i class="fa fa-sign-in" aria-hidden="true"> Ingresar</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/signup">
-
-                        <i class="fa fa-user" aria-hidden="true"> Crear Cuenta</i>
-                    </a>
-                </li>
-                {{/if}}
-
+            </div>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 py-3">
+                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+                {{!-- <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
             </ul>
 
-            <form class="navbar-form navbar-left" action="/search" method="GET">{{!-- cambio en la ruta --}}
-                <div class="input-group">
-                    <input class="form-control me-2" type="search" name="buscar" id="search" placeholder="Buscar"
-                        aria-label="Search" maxlength="50"
-                        oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-                    <button class="btn btn-outline-secondary " type="submit">Buscar</button>
-                </div>
-            </form>
+            {{#if user}}
+            <div class="column-login col-md-3 text-center d-flex py-3">
+                <a class="color-dark nav-link" href="/profile">
+                    <i class="fa fa-user" aria-hidden="true"> {{user.PERSONA_NOMBRE}}</i>
+                </a>
 
-        </div>
-    </div>
-</nav>
+                {{#if admin}}
+                <a class="color-dark nav-link" href="/administrator">
+                    <i class="fal fa-clipboard-list" aria-hidden="true"> ADMIN</i></a>
+                </a>
+                {{/if}}
 
-<div>
-
-    {{#if user}}
-    <div class="modal fade" id="userModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-success" id="staticBackdropLabel">
-                        <i class="fal fa-check-circle"> Actualizar Perfil</i>
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/profile/user/" class="row g-3 needs-validation" method="POST"
-                        enctype="multipart/form-data">
-
-                        <div class="col-md-6">
-                            <label class="form-label">Nombre:</label>
-                            <input type="text" value="{{profile.PERSONA_NOMBRE}}" name="PERSONA_NOMBRE"
-                                placeholder="NOMBRE" class="form-control" maxlength="60"
-                                style="text-transform:uppercase"
-                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                required autofocus>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label">Contraseña:</label>
-                            <input type="password" name="NUEVA_CONTRASENA" placeholder="CONTRASEÑA" class="form-control"
-                                maxlength="60"
-                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-                        </div>
-
-                        <div class="col-12 text-center">
-                            <button class="btn btn-success">
-                                Guardar
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-
-                    </form>
-                </div>
+                <a class="color-dark nav-link" href="/logout">
+                    <i class="fal fa-sign-out" aria-hidden="true"> Salir</i></a>
+                </a>
             </div>
+            {{else}}
+
+            <div class="column-login col-md-3 text-center d-flex py-3">
+                <a class="color-dark nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <i class="fa fa-sign-in" aria-hidden="true"> Ingresar</i>
+                </a>
+                <a class="color-dark nav-link" href="/signup">
+                    <i class="fa fa-user" aria-hidden="true"> Crear Cuenta</i>
+                </a>
+            </div>
+
+            {{/if}}
+
         </div>
     </div>
-    {{/if}}
+</header>
 
-</div>
 
 <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -170,27 +78,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    fetch('/autocompleteName')
-        .then(res => res.json())
-        .then(data => {
-
-            var productnames = [];
-
-            const names = '';
-
-            data.names.forEach(names => {
-                productnames.push(name.PRODUCTO_NOMBRE);
-            });
-
-            let uniqProducts = Array.from(new Set(productnames));
-
-            $("#search").autocomplete({
-                source: uniqProducts
-            });
-
-        });
-
-</script>

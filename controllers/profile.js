@@ -2,14 +2,20 @@ const pool = require('../database');
 
 module.exports = {
 
-    getAllProducts: async (req, res) => {
+    getDateProducts: async (req, res) => {
         const { PERSONA_ID } = req.user;
-        const people = await pool.query('SELECT * FROM PERSONA WHERE PERSONA.PERSONA_ID = ?', [req.user.PERSONA_ID]);
-        const profile = people[0];
 
-        const products = await pool.query('SELECT * FROM DETALLE_VENTA, PRODUCTO, PERSONA, VENTA WHERE DETALLE_VENTA.VENTA_ID = VENTA.VENTA_ID AND PERSONA.PERSONA_ID = VENTA.PERSONA_ID AND PRODUCTO.PRODUCTO_ID = DETALLE_VENTA.PRODUCTO_ID AND PERSONA.PERSONA_ID = ?', [PERSONA_ID]);
+        const products = await pool.query('SELECT * FROM DETALLE_VENTA, PRODUCTO, PERSONA, VENTA, TALLA WHERE DETALLE_VENTA.VENTA_ID = VENTA.VENTA_ID AND PERSONA.PERSONA_ID = VENTA.PERSONA_ID AND PRODUCTO.PRODUCTO_ID = DETALLE_VENTA.PRODUCTO_ID AND PRODUCTO.TALLA_ID = TALLA.TALLA_ID AND PERSONA.PERSONA_ID = ? ORDER BY DETALLE_VENTA.DETALLEVENTA_ID DESC', [PERSONA_ID]);
 
-        res.render('profile/list', { profile, products });
+        res.render('profile/listBuy', { products });
+    },
+
+    getAllDateBuy: async (req, res) => {
+        // const { PERSONA_ID } = req.user;
+
+        // const products = await pool.query('SELECT * FROM DETALLE_VENTA, PRODUCTO, PERSONA, VENTA, TALLA WHERE DETALLE_VENTA.VENTA_ID = VENTA.VENTA_ID AND PERSONA.PERSONA_ID = VENTA.PERSONA_ID AND PRODUCTO.PRODUCTO_ID = DETALLE_VENTA.PRODUCTO_ID AND PRODUCTO.TALLA_ID = TALLA.TALLA_ID AND PERSONA.PERSONA_ID = ? ORDER BY DETALLE_VENTA.DETALLEVENTA_ID DESC', [PERSONA_ID]);
+
+        // res.render('profile/listBuy', { products });
     },
 
     editPeoplePost: async (req, res) => {

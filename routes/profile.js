@@ -4,12 +4,14 @@ const router = Router();
 const { isLoggedIn } = require('../lib/auth');
 
 const {
-    getAllProducts,
+    getDateProducts,
+    getAllDateBuy,
     editPeoplePost,
     commentProduct
 } = require('../controllers/profile');
 
-router.get('/', isLoggedIn, getAllProducts);
+router.get('/', isLoggedIn, getDateProducts);
+router.post('/detail', isLoggedIn, getAllDateBuy);
 
 // Editar Persona
 // router.post('/user', isLoggedIn, validate(editUsersValidation), editPeoplePost);

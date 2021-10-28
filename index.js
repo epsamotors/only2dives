@@ -95,7 +95,8 @@ app.use('/administrator', require('./routes/administrator'));
 app.use('/profile', require('./routes/profile'));
 
 // Public
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

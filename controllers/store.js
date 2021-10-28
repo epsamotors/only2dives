@@ -108,43 +108,6 @@ module.exports = {
 
     },
 
-    getDetailGallery: async (req, res) => {
-
-        // const { gallery_id } = req.params;
-
-        // const gallerySearch = await pool.query('SELECT * FROM GALERIA WHERE GALERIA.GALERIA_ID= ?', [gallery_id]);
-
-        // const detailImage = gallerySearch[0].GALERIA_URL;
-        // const product_id = gallerySearch[0].PRODUCTO_ID;
-
-        // const details = await pool.query('SELECT * FROM PRODUCTO WHERE PRODUCTO.PRODUCTO_ID= ?', [product_id]);
-
-        // const gallery = await pool.query('SELECT * FROM GALERIA WHERE GALERIA_ESTADO = "ACTIVO" AND GALERIA.PRODUCTO_ID = ?', [product_id]);
-
-        // const comments = await pool.query('SELECT * FROM PRODUCTO, PERSONA, COMENTARIO WHERE PRODUCTO.PRODUCTO_ID = COMENTARIO.PRODUCTO_ID AND PERSONA.PERSONA_ID = COMENTARIO.PERSONA_ID AND PRODUCTO.PRODUCTO_ID = ? ORDER BY PRODUCTO.PRODUCTO_ID DESC LIMIT 5', [product_id]);
-        // const commentCount = comments.length;
-
-        // const feachaAlta = details[0].PRODUCTO_FECHAALTA.toLocaleDateString('sv-SE');
-
-        // res.render('store/detailGallery', { detail: details[0], detailImage, feachaAlta, comments, commentCount, gallery });
-        const { producto_id } = req.params;
-
-        const details = await pool.query('SELECT * FROM PRODUCTO WHERE PRODUCTO.PRODUCTO_ID= ?', [producto_id]);
-        const detailImage = details[0].PRODUCTO_URL;
-
-        const gallery = await pool.query('SELECT * FROM GALERIA WHERE GALERIA_ESTADO = "ACTIVO" AND GALERIA.PRODUCTO_ID = ?', [producto_id]);
-
-        const comments = await pool.query('SELECT * FROM PRODUCTO, PERSONA, COMENTARIO WHERE PRODUCTO.PRODUCTO_ID = COMENTARIO.PRODUCTO_ID AND PERSONA.PERSONA_ID = COMENTARIO.PERSONA_ID AND PRODUCTO.PRODUCTO_ID = ? ORDER BY PRODUCTO.PRODUCTO_ID DESC LIMIT 5', [producto_id]);
-
-        const commentCount = comments.length;
-
-        const feachaAlta = details[0].PRODUCTO_FECHAALTA.toLocaleDateString('sv-SE');
-
-        const recommended = await pool.query('SELECT * FROM PRODUCTO ORDER BY PRODUCTO.PRODUCTO_ID DESC LIMIT 4');
-
-        res.render('store/detailGallery', { detail: details[0], detailImage, feachaAlta, comments, commentCount, gallery, recommended });
-    },
-
     addToCart: async (req, res) => {
         const { PRODUCTO_ID } = req.body;
         const add = await pool.query('SELECT * FROM PRODUCTO, TALLA WHERE TALLA.TALLA_ID = PRODUCTO.PRODUCTO_ID AND PRODUCTO.PRODUCTO_ID = ?', [PRODUCTO_ID]);
@@ -206,94 +169,33 @@ module.exports = {
         res.redirect('/shop');
     },
 
-    // buyCart: async (req, res) => {
-    //     const userId = req.user.PERSONA_ID;
+    checkout: async (req, res) => {
 
-    //     var today = new Date();
-    //     const sellDate = today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
-
-    //     const products = Cart.getCart(userId);
-
-    //     var total = products.reduce((sum, value) => (typeof value.PRODUCTO_PRECIO == "number" ? sum + value.PRODUCTO_PRECIO : sum), 0);// Sumar total productos
-    //     var totalPrice = total.toFixed(0);
-
-    //     const { VENTA_TOTAL, VENTA_ESTADO, VENTA_FECHA } = req.body;
-
-    //     // for (const i in products) {
-    //     //     console.log(products[i]);
-    //     // }
-
-    //     const newSell = {
-    //         PERSONA_ID: req.user.PERSONA_ID,
-    //         VENTA_TOTAL,
-    //         VENTA_FECHA,
-    //         VENTA_ESTADO
-    //     }
-
-    //     newSell.VENTA_TOTAL = totalPrice,
-    //         newSell.VENTA_FECHA = sellDate;
-    //     newSell.VENTA_ESTADO = 'Activo';
-
-    //     console.log(newSell);
-
-    //     await pool.query('INSERT INTO VENTA set ?', [newSell]);
-
-
-    //     const row = await pool.query('SELECT MAX(VENTA_ID) AS ID FROM VENTA, PERSONA WHERE VENTA.PERSONA_ID = PERSONA.PERSONA_ID AND PERSONA.PERSONA_ID = ?', [req.user.PERSONA_ID]);
-    //     const lastId = row[0];
-    //     const lastSell = lastId.ID;
-    //     // const activado = 'ACTIVO';
-
-    //     for (let i of products) {
-    //         const detailSell = {
-    //             VENTA_ID: lastSell,
-    //             PRODUCTO_ID: i.PRODUCTO_ID,
-    //             DETALLEVENTA_CANTIDAD: '',
-    //             DETALLEVENTA_PRECIOUNITARIO: i.PRODUCTO_PRECIO,
-    //             DETALLEVENTA_DESCUENTO: '',
-    //             DETALLEVENTA_TOTAL: i.PRODUCTO_PRECIO,
-    //         }
-
-    //         console.log(detailSell);
-
-    //         await pool.query('INSERT INTO DETALLE_VENTA SET ?', [detailSell]);
-    //     }
-
-    //     Cart.deleteCart(userId);
-
-    //     // req.flash('success', 'Compra exitosa');
-    //     res.redirect('/profile');
-    // },
-
-    buyCart: async (req, res) => {
         const userId = req.user.PERSONA_ID;
-
         let boolBuy = [];
 
         var today = new Date();
-        const sellDate = today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+        const sellDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
         const products = Cart.getCart(userId);
-        var total = products.reduce((sum, value) => (typeof value.PRODUCTO_PRECIO == "number" ? sum + value.PRODUCTO_PRECIO : sum), 0);// Sumar total productos
+        var total = products.reduce((sum, value) => (typeof value.PRODUCTO_PRECIO == "number" ? sum + value.PRODUCTO_PRECIO : sum), 0);
         var totalPrice = total.toFixed(2);
 
-        const { VENTA_TOTAL, VENTA_ESTADO, VENTA_FECHA } = req.body;
+        const { VENTA_ESTADO } = req.body;
 
-        // for (const i in products) { 
-        //     console.log(products[i]);
-        // }
+        for (const i in products) { //Recorrer indices de productos comprados
+            console.log(products[i]);
+        }
 
         for (let i of products) {
-
             const addId = await pool.query('SELECT * FROM PRODUCTO WHERE PRODUCTO.PRODUCTO_ID = ?', [i.PRODUCTO_ID]);
             const productsId = addId[0];
 
-            if (i.PRODUCTO_CANTIDAD <= productsId.PRODUCTO_CANTIDAD) {
-                // boolBuy.push({ idUser: userId, ESTADO: true });
+            if (i.PRODUCTO_CANTIDAD <= productsId.PRODUCTO_STOCK) {
+                boolBuy.push({ idUser: userId, ESTADO: true });
             } else {
                 boolBuy.push({ idUser: userId, ESTADO: false });
             }
-
         }
 
         const isExisting = boolBuy.find(element => element.idUser == userId && element.ESTADO == false);
@@ -302,13 +204,14 @@ module.exports = {
             req.flash('message', 'No se pudo realizar su compra, porque uno de los productos que deseaba comprar ya no se encuenta en stock o no posee la cantidad que usted desea comprar, por favor eliminelo de su lista de compra o modifique su cantidad');
             res.redirect('/cart/errorbuy');
         } else {
-
             const newSell = {
                 PERSONA_ID: req.user.PERSONA_ID,
                 VENTA_TOTAL: totalPrice,
                 VENTA_FECHA: sellDate,
-                VENTA_ESTADO: 'ACTIVO'
+                VENTA_ESTADO
             }
+
+            newSell.VENTA_ESTADO = 'ACTIVO';
 
             console.log(newSell);
 
@@ -317,7 +220,7 @@ module.exports = {
             const row = await pool.query('SELECT MAX(VENTA_ID) AS ID FROM VENTA, PERSONA WHERE VENTA.PERSONA_ID = PERSONA.PERSONA_ID AND PERSONA.PERSONA_ID = ?', [req.user.PERSONA_ID]);
             const lastId = row[0];
             const lastSell = lastId.ID;
-            // const activado = 'ACTIVO';
+            const saleProduct = '0';
 
             for (let i of products) {
                 const detailSell = {
@@ -325,8 +228,8 @@ module.exports = {
                     PRODUCTO_ID: i.PRODUCTO_ID,
                     DETALLEVENTA_CANTIDAD: i.PRODUCTO_CANTIDAD,
                     DETALLEVENTA_PRECIOUNITARIO: i.PRECIO_UNITARIO,
-                    DETALLEVENTA_DESCUENTO: '',
-                    DETALLEVENTA_TOTAL: i.PRODUCTO_PRECIO
+                    DETALLEVENTA_DESCUENTO: saleProduct,
+                    DETALLEVENTA_TOTAL: i.PRODUCTO_PRECIO,
                 }
 
                 console.log(detailSell);
@@ -339,36 +242,37 @@ module.exports = {
                 const addId = await pool.query('SELECT * FROM PRODUCTO WHERE PRODUCTO.PRODUCTO_ID = ?', [i.PRODUCTO_ID]);
                 const productsId = addId[0];
 
-                const stock = productsId.PRODUCTO_CANTIDAD - i.PRODUCTO_CANTIDAD
+                const stock = productsId.PRODUCTO_STOCK - i.PRODUCTO_CANTIDAD
 
-                await pool.query('UPDATE PRODUCTO SET PRODUCTO_CANTIDAD = ? WHERE PRODUCTO.PRODUCTO_ID = ?', [stock, i.PRODUCTO_ID]);
+                await pool.query('UPDATE PRODUCTO SET PRODUCTO_STOCK = ? WHERE PRODUCTO.PRODUCTO_ID = ?', [stock, i.PRODUCTO_ID]);
             }
+
+            //
+            //
+            console.log(req.body);
+            const { stripeEmail, stripeToken } = req.body
+            //Almacenamos el comprador
+            const customer = await stripe.customers.create({
+                email: stripeEmail,
+                source: stripeToken
+            })
+            //Almacenar orden de compra
+            const charge = await stripe.charges.create({
+                amount: total,
+                currency: 'usd',
+                customer: customer.id,
+                description: 'compra de prueba'
+            })
+            console.log(charge.id);
+            //
+            //
 
             Cart.deleteCart(userId);
 
             // req.flash('success', 'Compra exitosa, por favor revise su factura');
             res.redirect('/profile');
         }
-    },
 
-    checkout: async (req, res) => {
-        console.log(req.body);
-        const { stripeEmail, stripeToken } = req.body
-        //Almacenamos el comprador
-        const customer = await stripe.customers.create({
-            email: stripeEmail,
-            source: stripeToken
-        })
-        //Almacenar orden de compra
-        const charge = await stripe.charges.create({
-            amount: '3000',
-            currency: 'usd',
-            customer: customer.id,
-            description: 'compra de prueba'
-        })
-        console.log(charge.id);
-
-        res.send('Compra realizada');
     },
 
     errorCart: async (req, res) => {
@@ -382,7 +286,7 @@ module.exports = {
             const addId = await pool.query('SELECT * FROM PRODUCTO WHERE PRODUCTO.PRODUCTO_ID = ?', [i.PRODUCTO_ID]);
             const productsId = addId[0];
 
-            if (i.PRODUCTO_CANTIDAD <= productsId.PRODUCTO_CANTIDAD) {
+            if (i.PRODUCTO_CANTIDAD <= productsId.PRODUCTO_STOCK) {
                 // boolBuy.push({ idUser: userId, ESTADO: true });
             } else {
                 stockProduct.push({

@@ -1,109 +1,292 @@
-<a class="nav-link float" href="/cart">
-    <i class="fa fa-shopping-bag"></i>
-    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-        {{count}}
-        <span class="visually-hidden">unread messages</span>
-    </span>
-</a>
-
 <div class="container p-4">
 
-
-    <div class="card mb-3">
-        <div class="row g-0">
-            <div class="col-md-4">
-                {{!-- <img src="{{detailImage}}" class="img-fluid rounded-start" alt="..."> --}}
-                <img class="img-fluid rounded-start" src="{{detail.PRODUCTO_URL}}" />
-                <div class="card-body text-center">
+    <div class="product-details-top">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-gallery product-gallery-vertical">
                     <div class="row">
-                        <div class="sliderGallery">
+                        <figure class="product-main-image">
+                            <img id="product-zoom" src={{detail.PRODUCTO_URL}}
+                                data-zoom-image="https://portotheme.com/html/molla/assets/images/products/single/1-big.jpg"
+                                alt="product image">
 
-                            <div class="slidesGallery ">
-                                {{#each gallery}}
-                                <div>
-                                    <a href="#myimgModal{{@index}}" data-bs-toggle="modal"
-                                        data-bs-target="#myimgModal{{@index}}">
-                                        <img src="{{GALERIA_URL}}" class="img-fluid rounded" width="100" height="150" />
-                                    </a>
-                                </div>
-                                {{/each}}
-                            </div>
+                        </figure>
+                        <div id="product-zoom-gallery" class="d-none product-image-gallery">
+                            <a class="product-gallery-item active" href="#"
+                                data-image="https://portotheme.com/html/molla/assets/images/products/single/1.jpg"
+                                data-zoom-image="https://portotheme.com/html/molla/assets/images/products/single/1-big.jpg">
+                                <img src="https://portotheme.com/html/molla/assets/images/products/single/1-small.jpg"
+                                    alt="product side">
+                            </a>
 
-                            {{#each gallery}}
-                            <div class="modal fade" id="myimgModal{{@index}}" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
+                            <a class="product-gallery-item" href="#"
+                                data-image="https://portotheme.com/html/molla/assets/images/products/single/2.jpg"
+                                data-zoom-image="https://portotheme.com/html/molla/assets/images/products/single/2-big.jpg">
+                                <img src="https://portotheme.com/html/molla/assets/images/products/single/2-small.jpg"
+                                    alt="product cross">
+                            </a>
 
-                                        <div class="modal-body">
+                            <a class="product-gallery-item" href="#"
+                                data-image="https://portotheme.com/html/molla/assets/images/products/single/3.jpg"
+                                data-zoom-image="https://portotheme.com/html/molla/assets/images/products/single/2-big.jpg">
+                                <img src="https://portotheme.com/html/molla/assets/images/products/single/3-small.jpg"
+                                    alt="product with model">
+                            </a>
 
-                                            <img class="img-fluid rounded-start" src="{{GALERIA_URL}}" />
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            {{/each}}
-
+                            <a class="product-gallery-item" href="#"
+                                data-image="https://portotheme.com/html/molla/assets/images/products/single/4.jpg"
+                                data-zoom-image="https://portotheme.com/html/molla/assets/images/products/single/4-big.jpg">
+                                <img src="https://portotheme.com/html/molla/assets/images/products/single/4-small.jpg"
+                                    alt="product back">
+                            </a>
                         </div>
-
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="card-body">
 
-                    <div class="btn-toolbar justify-content-between" role="toolbar"
-                        aria-label="Toolbar with button groups">
-                        <div>
-                            <h3 class="card-title">{{detail.PRODUCTO_NOMBRE}}</h3>
-                        </div>
-                        <div class="input-group">
-                            <form action="/shop" method="POST">
-                                <input type="hidden" name="PRODUCTO_ID" value="{{detail.PRODUCTO_ID}}">
-                                <button type="submit" class="btn btn-outline-secondary">Comprar</button>
-                            </form>
+            <div class="col-md-6">
+                <div class="product-details">
+                    <h1 class="product-title">{{detail.PRODUCTO_NOMBRE}}</h1>
+
+                    <div class="ratings-container">
+                        <div class="ratings">
+                            <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                        </div><!-- End .ratings -->
+                        {{!-- <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                        --}}
+                    </div>
+
+                    <div class="product-price">
+                        ${{detail.PRODUCTO_PRECIO}}
+                    </div>
+
+                    <div class="product-content">
+                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu
+                            augue. Morbi purus libero, faucibus adipiscing. Sed lectus. </p>
+                    </div>
+
+                    <div class="product-details-footer">
+                        <div class="product-cat">
+                            <span>Categorias:</span>
+                            <a href="#">Women</a>,
+                            <a href="#">Dresses</a>,
+                            <a href="#">Yellow</a>
+                        </div><!-- End .product-cat -->
+
+                        {{!-- <div class="social-icons social-icons-sm">
+                            <span class="social-label">Share:</span>
+                            <a href="#" class="social-icon" title="Facebook" target="_blank"><i
+                                    class="icon-facebook-f"></i></a>
+                            <a href="#" class="social-icon" title="Twitter" target="_blank"><i
+                                    class="icon-twitter"></i></a>
+                            <a href="#" class="social-icon" title="Instagram" target="_blank"><i
+                                    class="icon-instagram"></i></a>
+                            <a href="#" class="social-icon" title="Pinterest" target="_blank"><i
+                                    class="icon-pinterest"></i></a>
+                        </div> --}}
+                    </div>
+
+                    <div class="details-filter-row details-row-size">
+                        <label>Color:</label>
+
+                        <div class="select-custom">
+                            <select name="size" id="size" class="form-control">
+                                <option value="#" selected="selected">Elegir</option>
+                                <option value="s">Grey</option>
+                                <option value="m">Yellow</option>
+                                <option value="l">Blue</option>
+                                <option value="xl">Red</option>
+                                <option value="s">Purple</option>
+                                <option value="m">Orange</option>
+                                <option value="l">Green</option>
+                            </select>
                         </div>
                     </div>
 
-                    <p class="card-text"><small class="text-muted">Fecha: {{feachaAlta}}</small></p>
-                    <hr>
-                    <p class="card-text"><b>Talla:</b></p>
-                    <p class="card-text">{{detail.TALLA_NOMBRE}}</p>
-                    <hr>
-                    <p class="card-text"><b>Medida:</b></p>
-                    <p class="card-text">{{detail.PRODUCTO_MEDIDAS}}</p>
-                    <hr>
-                    <p class="card-text">{{detail.PRODUCTO_DESCRIPCION}}</p>
+                    <div class="details-filter-row details-row-size">
+                        <label for="size">Tallas:</label>
+                        <div class="product-price">
+                            {{detail.TALLA_NOMBRE}}
+                        </div>
+                        {{!-- <div class="select-custom">
+                            <select name="size" id="size" class="form-control">
+                                <option value="#" selected="selected">Elegir</option>
+                                <option value="s">Small</option>
+                                <option value="m">Medium</option>
+                                <option value="l">Large</option>
+                                <option value="xl">Extra Large</option>
+                            </select>
+                        </div> --}}
+
+                        {{!-- <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a> --}}
+                    </div>
+
+                    {{!-- <div class="details-filter-row details-row-size">
+                        <label for="qty">Cantidad:</label>
+                        <div class="select-custom">
+                            <input type="number" value="0" pattern="[0-9]*" class="form-control">
+                        </div>
+                    </div> --}}
+
+                    <div class="product-details-action pt-3">
+                        <div class="details-action-wrapper row">
+                            <div class="col-lg-6 col-md-12 btn-product02">
+                                <a href="#" class="d-flex justify-content-center hover_a_btn"><span>Añadir al
+                                        carrito</span></a>
+                            </div>
+                            <div class="col-lg-6 col-md-12 btn-product01">
+                                <a href="#" class="d-flex justify-content-center" title="Compare"><span>Realizar
+                                        compra</span></a>
+                            </div>
+                            {{!-- <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to
+                                    Wishlist</span></a> --}}
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container p-4">
-        <div class="card">
-            <div class="card-body shadow-sm bg-dark">
-                <h4>
-                    <span class="badge textPurple">Comentarios ( {{commentCount}} ) :</span>
-                </h4>
-            </div>
-            {{#if comments}}
-            {{#each comments}}
-            <div class="card-body">
-                {{PERSONA_NOMBRE}}:
-            </div>
-            <div class="card-body shadow-sm">
-                {{COMENTARIO_DESCRIPCION}}
-            </div>
-            {{/each}}
-            {{/if}}
+
+    <div class="product-details-tab pt-5">
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+            <li class="nav-item col-lg-3 col-md-12">
+                <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab"
+                    aria-controls="product-desc-tab" aria-selected="true">Description</a>
+            </li>
+            <li class="nav-item col-lg-3 col-md-12">
+                <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab"
+                    aria-controls="product-info-tab" aria-selected="false">Additional information</a>
+            </li>
+            <li class="nav-item col-lg-3 col-md-12">
+                <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab"
+                    aria-controls="product-shipping-tab" aria-selected="false">Shipping &amp; Returns</a>
+            </li>
+            <li class="nav-item col-lg-3 col-md-12">
+                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab"
+                    aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+            </li>
+        </ul>
+        <div class="tab-content tab-content02">
+            <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+                aria-labelledby="product-desc-link">
+                <div class="product-desc-content">
+                    <h3>Product Information</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
+                        eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
+                        pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
+                        Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec
+                        consectetuer ligula vulputate sem tristique cursus. </p>
+                    <ul>
+                        <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
+                        <li>Vivamus finibus vel mauris ut vehicula.</li>
+                        <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
+                    </ul>
+
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
+                        eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
+                        pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
+                        Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec
+                        consectetuer ligula vulputate sem tristique cursus. </p>
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
+                <div class="product-desc-content">
+                    <h3>Information</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis
+                        eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
+                        pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci.
+                    </p>
+
+                    <h3>Fabric &amp; care</h3>
+                    <ul>
+                        <li>Faux suede fabric</li>
+                        <li>Gold tone metal hoop handles.</li>
+                        <li>RI branding</li>
+                        <li>Snake print trim interior </li>
+                        <li>Adjustable cross body strap</li>
+                        <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
+                    </ul>
+
+                    <h3>Size</h3>
+                    <p>one size</p>
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel"
+                aria-labelledby="product-shipping-link">
+                <div class="product-desc-content">
+                    <h3>Delivery &amp; returns</h3>
+                    <p>We deliver to over 100 countries around the world. For full details of the delivery options we
+                        offer, please view our <a href="#">Delivery information</a><br>
+                        We hope you’ll love every purchase, but if you ever need to return an item you can do so within
+                        a month of receipt. For full details of how to make a return, please view our <a
+                            href="#">Returns information</a></p>
+                </div><!-- End .product-desc-content -->
+            </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                <div class="reviews">
+                    <h3>Reviews (2)</h3>
+                    <div class="review">
+                        <div class="row no-gutters">
+                            <div class="col-auto">
+                                <h4><a href="#">Samanta J.</a></h4>
+                                <div class="ratings-container">
+                                    <div class="ratings">
+                                        <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                    </div><!-- End .ratings -->
+                                </div><!-- End .rating-container -->
+                                <span class="review-date">6 days ago</span>
+                            </div><!-- End .col -->
+                            <div class="col">
+                                <h4>Good, perfect size</h4>
+
+                                <div class="review-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores
+                                        assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis
+                                        commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae
+                                        voluptas!</p>
+                                </div><!-- End .review-content -->
+
+                                <div class="review-action">
+                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
+                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                </div><!-- End .review-action -->
+                            </div><!-- End .col-auto -->
+                        </div><!-- End .row -->
+                    </div><!-- End .review -->
+
+                    <div class="review">
+                        <div class="row no-gutters">
+                            <div class="col-auto">
+                                <h4><a href="#">John Doe</a></h4>
+                                <div class="ratings-container">
+                                    <div class="ratings">
+                                        <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
+                                    </div><!-- End .ratings -->
+                                </div><!-- End .rating-container -->
+                                <span class="review-date">5 days ago</span>
+                            </div><!-- End .col -->
+                            <div class="col">
+                                <h4>Very good</h4>
+
+                                <div class="review-content">
+                                    <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis
+                                        laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure
+                                        illum repellendus, blanditiis perspiciatis beatae!</p>
+                                </div><!-- End .review-content -->
+
+                                <div class="review-action">
+                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
+                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                </div><!-- End .review-action -->
+                            </div><!-- End .col-auto -->
+                        </div><!-- End .row -->
+                    </div><!-- End .review -->
+                </div><!-- End .reviews -->
+            </div><!-- .End .tab-pane -->
         </div>
     </div>
+
 
 </div>
