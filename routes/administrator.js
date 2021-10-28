@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { isAdmin } = require('../lib/auth');
+//const { isAdmin } = require('../lib/auth');
 
 const {
     getAllProducts,
@@ -32,31 +32,31 @@ const {
 
 } = require('../controllers/administrator');
 
-router.get('/', isAdmin, getAllProducts);
+router.get('/',   getAllProducts);
 
-router.get('/addProduct', isAdmin, createProductPage);
-router.post('/addProduct', isAdmin, createProductPost);
-router.get('/editProduct/:producto_id', isAdmin, editProductPage);
-router.post('/editProduct/:producto_id', isAdmin, editProductPost);
-router.get('/deleteProduct/:producto_id', isAdmin, deleteProduct);
+router.get('/addProduct',   createProductPage);
+router.post('/addProduct',   createProductPost);
+router.get('/editProduct/:producto_id',   editProductPage);
+router.post('/editProduct/:producto_id',   editProductPost);
+router.get('/deleteProduct/:producto_id',   deleteProduct);
 
-router.post('/addImage', isAdmin, createImagePost);
-router.post('/editImage/:galeria_id', isAdmin, updateImagePost);
-router.get('/deleteImage/:galeria_id', isAdmin, deleteImagePost);
+router.post('/addImage',   createImagePost);
+router.post('/editImage/:galeria_id',   updateImagePost);
+router.get('/deleteImage/:galeria_id',   deleteImagePost);
 
-router.get('/category', isAdmin, listCategory);
-router.post('/addCategory', isAdmin, createCategoryPost);
-router.post('/editCategory/:category_id', isAdmin, editCategoryPost);
-router.get('/deleteCategory/:category_id', isAdmin, deleteCategoryPost);
+router.get('/category',   listCategory);
+router.post('/addCategory',   createCategoryPost);
+router.post('/editCategory/:category_id',   editCategoryPost);
+router.get('/deleteCategory/:category_id',   deleteCategoryPost);
 
-router.get('/slider', isAdmin, listSlider);
-router.post('/addSlider', isAdmin, addSliderPost);
-router.post('/editSlider/:slider_id', isAdmin, editSliderPost);
-router.get('/deleteSlider/:slider_id', isAdmin, deleteSliderPost);
+router.get('/slider',   listSlider);
+router.post('/addSlider',   addSliderPost);
+router.post('/editSlider/:slider_id',   editSliderPost);
+router.get('/deleteSlider/:slider_id',   deleteSliderPost);
 
-router.get('/size', isAdmin, listsize);
-router.post('/addSize', isAdmin, addSizePost);
-router.post('/editSize/:size_id', isAdmin, editSizePost);
-router.get('/deleteSize/:size_id', isAdmin, deleteSizePost);
+router.get('/size',   listsize);
+router.post('/addSize',   addSizePost);
+router.post('/editSize/:size_id',   editSizePost);
+router.get('/deleteSize/:size_id',   deleteSizePost);
 
 module.exports = router;

@@ -1,8 +1,7 @@
-<div class="container p-4">
+<div class="container color_bg02" style="padding-top: 70px;">
     <div class="row">
-
-        <div class="col-lg-2">
-            <div class="panel panel-default">
+        <div class="col-lg-2 col-md-12 col-12">
+            {{!-- <div class="panel panel-default">
                 <div class="d-grid gap-3 mb-1">
                     <a href="/administrator/addProduct" class="btn btn-outline-secondary">
                         Agregar
@@ -23,22 +22,163 @@
                         Slider
                     </a>
                 </div>
+            </div> --}}
+            <div>
+                <div class="colunm_dasboard">
+                <p>
+                    <a class="select-btn" 
+                    data-toggle="collapse" 
+                    href="#multiCollapseExample1" 
+                    role="button" 
+                    aria-expanded="false" 
+                    aria-controls="multiCollapseExample1">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboards 
+                    <i class="fa fa-arrow-circle-down float-rigth" aria-hidden="true"></i>
+                    </a>
+                </p>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse item_admin" id="multiCollapseExample1">
+                            <a href="/" class="">
+                                Inicio <i class="fa fa-arrows-h float-rigth" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="colunm_autentication">
+                    <p>
+                        <a class="select-btn" 
+                        data-toggle="collapse" 
+                        href="#multiCollapseExample2" 
+                        role="button" 
+                        aria-expanded="false" 
+                        aria-controls="multiCollapseExample2">
+                        <i class="fa fa-user" aria-hidden="true"></i> Authentication
+                        <i class="fa fa-arrow-circle-down float-rigth" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse item_admin" id="multiCollapseExample2">
+                                <a href="/" class="">
+                                    Perfil <i class="fa fa-arrows-h float-rigth" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <hr class="navbar-divider">
+                <h6 class="navbar-heading">Tienda</h6>
+                    <div class="colunm_categoria">
+                    <p>
+                        <a class="select-btn" 
+                        data-toggle="collapse" 
+                        href="#multiCollapseExample3" 
+                        role="button" 
+                        aria-expanded="false" 
+                        aria-controls="multiCollapseExample3">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i> Productos 
+                        <i class="fa fa-arrow-circle-down float-rigth" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse item_admin" id="multiCollapseExample3">
+                                <div>
+                                    <a href="/administrator/addProduct" class="">
+                                        Crear Productos <i class="fa fa-arrows-h float-rigth" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="colunm_category">
+                        <p>
+                            <a class="select-btn" 
+                            data-toggle="collapse" 
+                            href="#multiCollapseExample4" 
+                            role="button" 
+                            aria-expanded="false" 
+                            aria-controls="multiCollapseExample4">
+                            <i class="fa fa-user" aria-hidden="true"></i> Categorias
+                            <i class="fa fa-arrow-circle-down float-rigth" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse item_admin" id="multiCollapseExample4">
+                                    <a href="/administrator/category" class="">
+                                        Crear Categoria <i class="fa fa-arrows-h float-rigth" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="colunm_tallas">
+                        <p>
+                            <a class="select-btn" 
+                            data-toggle="collapse" 
+                            href="#multiCollapseExample5" 
+                            role="button" 
+                            aria-expanded="false" 
+                            aria-controls="multiCollapseExample5">
+                            <i class="fa fa-user" aria-hidden="true"></i> Tallas
+                            <i class="fa fa-arrow-circle-down float-rigth" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse item_admin" id="multiCollapseExample5">
+                                    <a href="/administrator/size" class="">
+                                        Crear Talla <i class="fa fa-arrows-h float-rigth" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="colunm_slider">
+                        <p>
+                            <a class="select-btn" 
+                            data-toggle="collapse" 
+                            href="#multiCollapseExample6" 
+                            role="button" 
+                            aria-expanded="false" 
+                            aria-controls="multiCollapseExample6">
+                            <i class="fa fa-user" aria-hidden="true"></i> Slider
+                            <i class="fa fa-arrow-circle-down float-rigth" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse item_admin" id="multiCollapseExample6">
+                                    <a href="/administrator/slider" class="">
+                                        Crear Slider <i class="fa fa-arrows-h float-rigth" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
 
-        <div class="col-lg-10">
+        <div class="col-lg-10 col-md-12">
             <div class="panel panel-default">
 
                 <div class="row">
 
-                    {{#if products}}
+                    {{!-- {{#if products}} --}}
                     <div class="col-lg-12">
-                        <div class="rounded-pill clearfix"
+                        <div class="clearfix"
                             style="border: 2px dotted #e1cdb3; text-align:center; center{margin:16px 0;">
-                            <h2 style="color: #e1cdb3;">Productos Agregados al Sistema</h2>
+                            <h2 style="color: #e1cdb3;">¡Bienvenido al escritorio de la Tienda!</h2>
+                            <p class="about-description">Hemos recopilado algunos enlaces para que puedas comenzar:</p>
                         </div>
                     </div>
-                    {{#each products}}
+                    {{!-- {{#each products}} --}}
                     <div class="col-lg-3 p-4">
                         <div class="card shadow-sm">
                             <a type="button" href="/administrator/deleteProduct/{{PRODUCTO_ID}}"
@@ -103,11 +243,17 @@
                         </div>
                     </div>
 
-                    {{/each}}
-                    {{/if}}
+                    {{!-- {{/each}}
+                    {{/if}} --}}
                 </div>
 
             </div>
         </div>
     </div>
+
+
+        
 </div>
+
+
+
