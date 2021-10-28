@@ -1,0 +1,90 @@
+<a class="nav-link float" href="/cart">
+    <i class="fa fa-shopping-bag"></i>
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+        {{count}}
+        <span class="visually-hidden">unread messages</span>
+    </span>
+</a>
+
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+
+            <div class="card">
+                <div class="card-header text-uppercase text-center">
+                    <h4>Buscar</h4>
+                </div>
+                <div class="card-body">
+
+                    <form action="/category" method="GET">
+                        {{#each category}}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="CATEGORIA_ID" value="{{CATEGORIA_ID}}"
+                                id="flexRadioDefault{{@index}}">
+                            <label class="form-check-label" for="flexRadioDefault{{@index}}">
+                                {{CATEGORIA_NOMBRE}}
+                            </label>
+                        </div>
+                        {{/each}}
+                        <div class="mb-3">
+                        </div>
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                        </div>
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            {{#if findProducts}}
+                            <div class="col-md-4 mx-auto">
+                                <div class="card card-body text-center">
+                                    <p>No se encontro su busqueda</p>
+                                </div>
+                            </div>
+                            {{/if}}
+
+                            {{!-- --}}
+
+                            {{#if products}}
+                            <div class="rounded-pill clearfix"
+                                style="border: 1px dotted #e1cdb3; text-align:center; center{margin:16px 0;">
+                                <h5 class="textNut">PRODUCTOS</h5>
+                            </div>
+                            <div class="mb-3">
+                            </div>
+                            {{#each products}}
+                            <div class="col-md-3 text-center">
+                                <div class="card mb-4 shadow-sm">
+                                    <img src="{{PRODUCTO_URL}}" class="card-img-top" width="100px" height="200px">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-uppercase textNut">
+                                            $ {{PRODUCTO_PRECIO}}
+                                        </h3>
+                                        <p>{{PRODUCTO_NOMBRE}}</p>
+                                        </a>
+                                        <a href="detail/{{PRODUCTO_ID}}" class="btn btn-outline-warning">Detalle</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                            {{/if}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

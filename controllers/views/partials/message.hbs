@@ -1,0 +1,79 @@
+{{!-- {{#if message}}
+<div class="container p-4 flashMessage">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}} --}}
+
+{{#if message}}
+<div class="container p-4 flashMessage">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>
+                    {{message}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{!-- {{#if success}}
+<div class="container p-4 flashSuccess">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{success}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}} --}}
+
+{{#if success}}
+<div class="container p-4 ">
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div>
+                    {{success}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{!-- --}}
+{{!-- --}}
+{{#if messageCart}}
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>
+                    {{messageCart}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}

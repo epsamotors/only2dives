@@ -1,0 +1,59 @@
+<div class="container p-4">
+    <div class="row">
+        {{#if products}}
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="mx-auto">
+
+                                <table class="table caption-top">
+                                    <caption>Lista de Productos Comprados</caption>
+                                    <thead class="text-center table-secondary">
+                                        <tr class="card-title text-uppercase">
+                                            <td>Nombre</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Total</td>
+                                            <td>Talla</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        {{#each products}}
+                                        <tr>
+                                            <td>{{PRODUCTO_NOMBRE}}</td>
+                                            <td>{{DETALLEVENTA_PRECIOUNITARIO}} $</td>
+                                            <td>{{DETALLEVENTA_CANTIDAD}} $</td>
+                                            <td>{{DETALLEVENTA_TOTAL}} $</td>
+                                            <td>{{TALLA_NOMBRE}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{else}}
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3>No has realizado ningun pedido</h3>
+                        <a href="/shop" class="btn btn-primary m-4">
+                            Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+
+    </div>
+</div>

@@ -2,15 +2,24 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+<<<<<<< HEAD
 							<div class="section-title text-center">
 								<h2 class="border-left-right-btm">All Product's</h2>
 							</div>
 			</div>
 		</div>				
+=======
+				<div class="section-title text-center">
+					<h2 class="border-left-right-btm">Todos los productos</h2>
+				</div>
+			</div>
+		</div>
+>>>>>>> main
 		<div class="row">
 			<div class="col-md-12">
 				<!-- best-sell-product -->
 				<div class="tab-content best-sell-product">
+<<<<<<< HEAD
 								<div role="tabpanel" class="tab-pane fade in active" id="men">
 									<div class="row">
 										<div class="col-md-4 col-sm-4 col-xs-12">
@@ -116,6 +125,57 @@
 								</div>
 								
 								
+=======
+					<div role="tabpanel" class="tab-pane fade in active" id="men">
+						<div class="row">
+
+							{{#each products}}
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<!-- Single-product start -->
+								<div class="single-product">
+									<div class="product-photo">
+										<a href="#">
+											<img class="primary-photo" src="{{PRODUCTO_URL}}" alt="">
+											{{!-- <img class="secondary-photo" src="img/best-sell/6.jpg" alt=""> --}}
+										</a>
+										<div class="pro-action">
+											<a href="detail/{{PRODUCTO_ID}}" class="action-btn"><i
+													class="fa fa-shopping-cart"></i><span>
+													<font style="vertical-align: inherit;">Añadir a la cesta</font>
+												</span></a>
+										</div>
+									</div>
+									<div class="product-brief">
+										<h2><a href="#">
+												<font style="vertical-align: inherit;">
+													<font style="vertical-align: inherit;">{{PRODUCTO_NOMBRE}}</font>
+												</font>
+											</a></h2>
+										<div class="product-brief-inner">
+											<h3>
+												<font style="vertical-align: inherit;">
+													<font style="vertical-align: inherit;">{{PRODUCTO_PRECIO}} $</font>
+												</font>
+											</h3>
+											<div class="pro-rating">
+												<a href="#"><i class="sp-star rating-1"></i></a>
+												<a href="#"><i class="sp-star rating-1"></i></a>
+												<a href="#"><i class="sp-star rating-1"></i></a>
+												<a href="#"><i class="sp-star rating-1"></i></a>
+												<a href="#"><i class="sp-star rating-2"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Single-product end -->
+							</div>
+							{{/each}}
+
+						</div>
+					</div>
+
+
+>>>>>>> main
 				</div>
 			</div>
 		</div>

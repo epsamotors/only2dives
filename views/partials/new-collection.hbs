@@ -1,4 +1,5 @@
 <div class="new-collection-area fix margin-bottom-80">
+<<<<<<< HEAD
 		<div class="row">
 					<div class="col-md-12">
 						<div class="section-title text-center">
@@ -68,4 +69,39 @@
 						</div>
 					</div>
 		</div>
+=======
+	<div class="row">
+		<div class="col-md-12">
+			<div class="section-title text-center">
+				<h2 class="border-left-right-btm">Nueva Colección</h2>
+			</div>
+		</div>
+	</div>
+	<div class="d-lg-flex d-block">
+
+		{{#each recommended}}
+		<div class="col-lg-4 col-md-12 padding-0">
+			<div class="single-collection">
+				<div class="collection-photo">
+					<a href="#"><img src={{PRODUCTO_URL}} alt=""></a>
+				</div>
+				<div class="collection-brief">
+					<div class="text-right">
+						<span class="new">Nuevo</span>
+					</div>
+					<h2>Nuevo <br> <span>{{PRODUCTO_NOMBRE}}</span></h2>
+					<ul>
+						<li>100% Algodon</li>
+						{{!-- <li>fress product</li> --}}
+						{{!-- <li>black color</li> --}}
+						<li>Alta calidad</li>
+					</ul>
+					<a href="detail/{{PRODUCTO_ID}}" class="shop-now active-shop-now">Comprar</a>
+				</div>
+			</div>
+		</div>
+		{{/each}}
+
+	</div>
+>>>>>>> main
 </div>

@@ -1,0 +1,101 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <div class="panel-heading text-center">
+                        <h3>
+                            <div class="panel-title">Registro</div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="/signup" class="row g-3 needs-validation" method="POST" enctype="multipart/form-data">
+
+                        <div class="mb-1">
+                            <input type="text" name="PERSONA_APELLIDO" placeholder="APELLIDO" class="form-control"
+                                style="text-transform:uppercase" maxlength="60"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        <div class="mb-1">
+                            <input type="text" name="PERSONA_NOMBRE" placeholder="NOMBRE" class="form-control"
+                                style="text-transform:uppercase" maxlength="60"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        {{!-- --}}
+                        {{!-- --}}
+                        <div class="col-md-4">
+                            <label class="form-label">Provincia:</label>
+                            <div class="form-label">
+                                <select id="provincia" class="form-select" aria-label="Default select example" required>
+                                    <option value="0" selected>SELECCIONE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">CIUDAD:</label>
+                            <div class="form-label">
+                                <select id="canton" class="form-select" aria-label="Default select example" required>
+                                    <option value="0" selected>SELECCIONE</option>
+                                </select>
+                            </div>
+                        </div>
+                        {{!-- --}}
+                        {{!-- --}}
+
+                        <div class="mb-1">
+                            <input type="text" name="PERSONA_NACIONALIDAD" placeholder="NACIONALIDAD"
+                                class="form-control" style="text-transform:uppercase" maxlength="60"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        <div class="mb-1">
+                            <input type="number" name="PERSONA_DNI" placeholder="DNI" class="form-control"
+                                maxlength="13"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        <div class="mb-1">
+                            <input type="number" name="PERSONA_TELEFONO" placeholder="TELEFONO" class="form-control"
+                                maxlength="13"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        <div class="mb-1">
+                            <input type="text" name="PERSONA_DIRECCION" placeholder="DIRECCIÓN" class="form-control"
+                                style="text-transform:uppercase" maxlength="60"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        <div class="mb-1">
+                            <input type="email" name="PERSONA_CORREO" class="form-control" placeholder="CORRREO"
+                                maxlength="60"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+
+                        <div class="mb-1">
+                            <input type="password" name="PERSONA_CONTRASENA" placeholder="CONTRASEÑA"
+                                class="form-control" maxlength="60"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary">
+                                Aceptar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,154 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+
+                            <table class="table caption-top">
+                                <caption>Lista de Tallas</caption>
+                                <thead class="text-center table-secondary">
+                                    <tr class="card-title text-uppercase">
+                                        <td>Tipo</td>
+                                        <td>Nombre</td>
+                                        <td>Actualizar</td>
+                                        <td>Eliminar</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    {{#each size}}
+                                    <tr>
+                                        <td>{{TALLA_TIPO}}</td>
+                                        <td>{{TALLA_NOMBRE}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#mySizeModal{{@index}}">
+                                                Actualizar
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <a href="/administrator/deleteSize/{{TALLA_ID}}"
+                                                class="btn btn-outline-danger">Eliminar</a>
+                                        </td>
+                                    </tr>
+
+                                    <div class="modal fade" id="mySizeModal{{@index}}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-success" id="staticBackdropLabel">
+                                                        <i class="fal fa-check-circle"> {{TALLA_NOMBRE}}</i>
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+
+                                                    <form action="/administrator/editSize/{{TALLA_ID}}" method="POST">
+
+                                                        <div class="col-md-12">
+                                                            <label class="form-label">Nombre:</label>
+                                                            <input type="text" value="{{TALLA_NOMBRE}}"
+                                                                name="TALLA_NOMBRE" placeholder="NOMBRE"
+                                                                class="form-control" maxlength="60"
+                                                                style="text-transform:uppercase"
+                                                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                                required autofocus>
+                                                        </div>
+
+                                                        <div class="col-12 text-center">
+                                                            <button class="btn btn-success">
+                                                                Guardar
+                                                            </button>
+                                                            <a href="/administrator/size"
+                                                                class="btn btn-danger">Cancelar</a>
+                                                        </div>
+
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {{/each}}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12 col-md-3 col-md-pull-9">
+            <div class="panel panel-default">
+                <div class="card">
+                    <div class="card-body text-secondary">
+                        <div class="d-grid gap-3">
+                            <a class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                                Agregar Talla
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="categoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-success" id="staticBackdropLabel">
+                            <i class="fal fa-check-circle"> Agregar nueva talla</i>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/administrator/addSize/" class="row g-3 needs-validation" method="POST"
+                            enctype="multipart/form-data">
+
+                            <div class="col-md-6">
+                                <label class="form-label">TIPO:</label>
+                                <div class="form-label">
+                                    <select name="TALLA_TIPO" class="form-select" aria-label="Default select example"
+                                        required>
+                                        {{#each sizeTipe}}
+                                        <option value="{{TALLA_TIPO}}">{{TALLA_TIPO}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre:</label>
+                                <input type="text" name="TALLA_NOMBRE" placeholder="NOMBRE" class="form-control"
+                                    maxlength="60" style="text-transform:uppercase"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    required autofocus>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button class="btn btn-success">
+                                    Guardar
+                                </button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,144 @@
+<a class="nav-link float" href="/cart">
+    <i class="fa fa-shopping-bag"></i>
+    {{!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        99+
+        <span class="visually-hidden">unread messages</span>
+    </span> --}}
+</a>
+
+<div class="container p-4">
+    <div class="card mb-8">
+        <div class="row g-0">
+            <div class="col-md-4">
+
+                <div class="card">
+
+                    <div class="card-body">
+                        <img src="{{detailImage}}" class="card-img-top" width="80px" height="300px">
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="text-center">
+                                    {{#if gallery}}
+                                    <a class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#galleryModal">
+                                        Ver Galleria
+                                    </a>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <div class="col-md-4">
+                        <h5 class="card-title">{{detail.PRODUCTO_NOMBRE}}</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="card-title">Precio: COP {{detail.PRODUCTO_PRECIO}}</h3>
+                    </div>
+                    <br>
+                    <div class="col-md-4">
+                        <form action="/shop" method="POST">
+                            <input type="hidden" name="PRODUCTO_ID" value="{{detail.PRODUCTO_ID}}">
+                            <button type="submit" class="btn btn-outline-secondary">Comprar</button>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="col-md-4">
+                        <p>Fecha: {{feachaAlta}}</p>
+                    </div>
+                    <textarea rows="6" class="form-control" readonly>{{detail.PRODUCTO_DESCRIPCION}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="galleryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="staticBackdropLabel">
+                    <i class="fal fa-check-circle"> Galleria</i>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="sliderGallery">
+
+                    {{#each gallery}}
+                    <a href="#slide-{{@index}}">{{@index}}</a>
+                    {{/each}}
+
+                    <div class="slidesGallery">
+                        {{#each gallery}}
+                        <div id="slide-{{@index}}">
+                            <img src="{{GALERIA_URL}}" class="card-img-top" width="80px" height="300px" />
+                        </div>
+                        {{/each}}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container p-4">
+    <div class="card">
+        <div class="card-body shadow-sm bg-dark">
+            <h4>
+                <span class="badge textPurple">Comentarios ( {{commentCount}} ) :</span>
+            </h4>
+        </div>
+        {{#if comments}}
+        {{#each comments}}
+        <div class="card-body">
+            {{PERSONA_NOMBRE}}:
+        </div>
+        <div class="card-body shadow-sm">
+            {{COMENTARIO_DESCRIPCION}}
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</div>
+
+{{!-- <div class="container p-4">
+    <div class="row">
+        {{#if recommended}}
+        <div class="mb-3">
+            <div class="rounded-pill clearfix"
+                style="border: 2px dotted #e1cdb3; text-align:center; center{margin:16px 0;">
+                <h2 style="color: #e1cdb3;">PRODUCTOS RECOMENDADOS</h2>
+            </div>
+        </div>
+
+
+        <div class="slidesRecommended">
+            {{#each recommended}}
+            <div class="col-md-3 text-center">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{PRODUCTO_URL}}" class="card-img-top" width="80px" height="300px" />
+                    <a href="detailGallery/{{PRODUCTO_ID}}" type="button" class="btn btn-outline-secondary">Detalle</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        {{/if}}
+    </div>
+</div> --}}

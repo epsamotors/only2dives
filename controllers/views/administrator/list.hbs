@@ -1,0 +1,113 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-lg-2">
+            <div class="panel panel-default">
+                <div class="d-grid gap-3 mb-1">
+                    <a href="/administrator/addProduct" class="btn btn-outline-secondary">
+                        Agregar
+                    </a>
+                </div>
+                <div class="d-grid gap-3 mb-1">
+                    <a href="/administrator/category" class="btn btn-outline-secondary">
+                        Categoria
+                    </a>
+                </div>
+                <div class="d-grid gap-3 mb-1">
+                    <a href="/administrator/size" class="btn btn-outline-secondary">
+                        Talla
+                    </a>
+                </div>
+                <div class="d-grid gap-3 mb-1">
+                    <a href="/administrator/slider" class="btn btn-outline-secondary">
+                        Slider
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-10">
+            <div class="panel panel-default">
+
+                <div class="row">
+
+                    {{#if products}}
+                    <div class="col-lg-12">
+                        <div class="rounded-pill clearfix"
+                            style="border: 2px dotted #e1cdb3; text-align:center; center{margin:16px 0;">
+                            <h2 style="color: #e1cdb3;">Productos Agregados al Sistema</h2>
+                        </div>
+                    </div>
+                    {{#each products}}
+                    <div class="col-lg-3 p-4">
+                        <div class="card shadow-sm">
+                            <a type="button" href="/administrator/deleteProduct/{{PRODUCTO_ID}}"
+                                class="btn btn-outline-danger deleteAbso">X</a>
+                            <img class="img-fluid" src="{{PRODUCTO_URL}}" />
+                            <div class="card-body text-center">
+                                <h3 style="color: #e1cdb3;" class="card-title text-uppercase">
+                                    $ {{PRODUCTO_PRECIO}}
+                                </h3>
+                                <p>{{PRODUCTO_NOMBRE}}</p>
+
+                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                    <a href="/administrator/editProduct/{{PRODUCTO_ID}}"
+                                        class="btn btn-outline-primary">Actualizar</a>
+
+                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#myAddImage{{@index}}">
+                                        Agregar
+                                    </button>
+                                    {{!--<a href="/administrator/deleteProduct/{{PRODUCTO_ID}}"
+                                        class="btn btn-outline-danger">Eliminar</a> --}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="myAddImage{{@index}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-success" id="staticBackdropLabel">
+                                        <i class="fal fa-check-circle"> {{PRODUCTO_NOMBRE}}</i>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <form action="/administrator/addImage" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="PRODUCTO_ID" value={{PRODUCTO_ID}}>
+
+                                        <div class="mb-3">
+                                            <input type="file" accept="image/*" name="SUBIR_IMAGEN" class="form-control"
+                                                onchange="loadFile(event)">
+                                        </div>
+
+                                        <div class="col-12 text-center">
+                                            <button class="btn btn-success">
+                                                Guardar
+                                            </button>
+                                            <a href="/administrator" class="btn btn-danger">Cancelar</a>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {{/each}}
+                    {{/if}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

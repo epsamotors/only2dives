@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
 
@@ -16,64 +17,39 @@
 
                 {{#if user}}
 
+=======
+<header class="color_bg text-white">
+    <div class="container">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        {{user.PERSONA_NOMBRE}}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userModal">
-                                <i class="fa fa-user"> Actualizar Perfil</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/profile">
-                                <i class="fal fa-clipboard-list"> Mi galleria</i>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/logout">
-                                <i class="fal fa-sign-out"> Salir</i></a>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+        <div class="nav-contet">
+            <a href="/shop" class="navbar-brand">
+                <img src="../img/logo.png" class="logo-home" alt="Logo" />
+            </a>
+            <div class="col">
+
+            </div>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 py-3">
+                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+                {{!-- <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
+            </ul>
+>>>>>>> main
+
+            {{#if user}}
+            <div class="column-login col-md-3 text-center d-flex py-3">
+                <a class="color-dark nav-link" href="/profile">
+                    <i class="fa fa-user" aria-hidden="true"> {{user.PERSONA_NOMBRE}}</i>
+                </a>
 
                 {{#if admin}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/administrator">
-                        <i class="fa fa-user">Administrar</i>
-                    </a>
-                </li>
-                {{else}}
-
+                <a class="color-dark nav-link" href="/administrator">
+                    <i class="fal fa-clipboard-list" aria-hidden="true"> ADMIN</i></a>
+                </a>
                 {{/if}}
 
-
-                {{else}}
-                <li class="nav-item">
-                    <a class="nav-link" href="/shop">
-                        <i class="fal fa-cart-arrow-down"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        <i class="fa fa-sign-in" aria-hidden="true"> Ingresar</i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/signup">
-
-                        <i class="fa fa-user" aria-hidden="true"> Crear Cuenta</i>
-                    </a>
-                </li>
-                {{/if}}
-
+<<<<<<< HEAD
             </ul>
 
             <form class="navbar-form navbar-left" action="/search" method="GET">
@@ -113,6 +89,8 @@
                 <a class="color-dark nav-link" href="/profile">
                     <i class="fal fa-clipboard-list" aria-hidden="true"> Mi galleria</i>
                 </a>
+=======
+>>>>>>> main
                 <a class="color-dark nav-link" href="/logout">
                     <i class="fal fa-sign-out" aria-hidden="true"> Salir</i></a>
                 </a>
@@ -126,9 +104,12 @@
                 <a class="color-dark nav-link" href="/signup">
                     <i class="fa fa-user" aria-hidden="true"> Crear Cuenta</i>
                 </a>
+<<<<<<< HEAD
                 <a class="color-dark nav-link" href="/cart">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </a>
+=======
+>>>>>>> main
             </div>
 
             {{/if}}
@@ -166,27 +147,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    fetch('/autocompleteName')
-        .then(res => res.json())
-        .then(data => {
-
-            var productnames = [];
-
-            const names = '';
-
-            data.names.forEach(names => {
-                productnames.push(name.PRODUCTO_NOMBRE);
-            });
-
-            let uniqProducts = Array.from(new Set(productnames));
-
-            $("#search").autocomplete({
-                source: uniqProducts
-            });
-
-        });
-
-</script>

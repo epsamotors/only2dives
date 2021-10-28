@@ -1,0 +1,196 @@
+<div class="container p-4">
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <div class="panel-heading text-center">
+                        <h3>
+                            <div class="panel-title">REGISTRO PRODUCTO</div>
+                        </h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="/administrator/addProduct" method="POST" class="row g-3 needs-validation"
+                        enctype="multipart/form-data">
+
+                        <div class="col-8">
+                            <label class="form-label">NOMBRE:</label>
+                            <input type="text" name="PRODUCTO_NOMBRE" class="form-control" placeholder="NOMBRE"
+                                maxlength="60" id="searchName" style="text-transform:uppercase"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required autofocus>
+                        </div>
+
+                        <div class="col-4">
+                            <label class="form-label">CODIGO:</label>
+                            <input type="number" name="PRODUCTO_CODIGO" placeholder="CODIGO" class="form-control"
+                                onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 "
+                                maxlength="15"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+
+                        <div class="col-4">
+                            <label class="form-label">PRECIO:</label>
+                            <input type="number" name="PRODUCTO_PRECIO" placeholder="PRECIO UNITARIO"
+                                class="form-control"
+                                onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 "
+                                maxlength="15"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+
+                        <div class="col-4">
+                            <label class="form-label">STOCK:</label>
+                            <input type="number" name="PRODUCTO_STOCK" placeholder="STOCK" class="form-control"
+                                onkeypress="return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0 "
+                                maxlength="15"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">CATEGORIA:</label>
+                            <div class="form-label">
+                                <select name="CATEGORIA_ID" class="form-select" aria-label="Default select example"
+                                    required>
+                                    {{#each category}}
+                                    <option value="{{CATEGORIA_ID}}">{{CATEGORIA_NOMBRE}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                        {{!-- --}}
+                        {{!-- --}}
+                        <div class="col-md-4">
+                            <label class="form-label">Tipo:</label>
+                            <div class="form-label">
+                                <select id="tipo" class="form-select" aria-label="Default select example" required>
+                                    <option value="0" selected>SELECCIONE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Talla:</label>
+                            <div class="form-label">
+                                <select id="talla" name="TALLA_ID" class="form-select"
+                                    aria-label="Default select example" required>
+                                    <option value="0" selected>SELECCIONE</option>
+                                </select>
+                            </div>
+                        </div>
+                        {{!-- --}}
+                        {{!-- --}}
+
+                        {{!-- <div class="col-4">
+                            <label for="exampleColorInput" class="form-label">Color</label>
+                            <input type="color" class="form-control form-control-color" id="exampleColorInput"
+                                value="#563d7c" title="Escoge un color" name="COLOR_CODIGO">
+                        </div> --}}
+
+                        <div class="col-12">
+                            <label class="form-label">MEDIDAS:</label>
+                            <textarea name="PRODUCTO_MEDIDAS" rows="2" class="form-control" placeholder="MEDIDAS"
+                                style="text-transform:uppercase" required></textarea>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">DESCRIPCIÓN:</label>
+                            <textarea name="PRODUCTO_DESCRIPCION" rows="4" class="form-control"
+                                placeholder="DESCRIPCIÓN" style="text-transform:uppercase" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="file" accept="image/*" name="SUBIR_IMAGEN" class="form-control"
+                                onchange="loadFile(event)">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <img id="output" class="img-thumbnail" width="300px" />
+                        </div>
+
+                        <div class="col-12 text-center">
+                            <button class="btn btn-success">
+                                Guardar
+                            </button>
+                            <a href="/administrator" class="btn btn-danger">Cancelar</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var loadFile = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('output');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
+
+
+<script>
+    fetch('/sizes')
+        .then(res => res.json())
+        .then(data => {
+
+            let tipos = [];
+
+            var tallas = [
+                {
+                    id: '',
+                    tipo: '',
+                    talla: ''
+                }
+            ];
+
+            const sizes = '';
+
+            data.sizes.forEach(size => {
+                tipos.push(size.TALLA_TIPO);
+                tallas.push({
+                    id: size.TALLA_ID,
+                    tipo: size.TALLA_TIPO,
+                    talla: size.TALLA_NOMBRE
+                });
+            });
+
+            let unicosTipos = Array.from(new Set(tipos));
+
+            var areasSelect = document.getElementById('tipo');
+            var categoriasSelect = document.getElementById('talla');
+
+            areasSelect.addEventListener("change", cargarCategorias);
+
+            unicosTipos.forEach(function (unicosTipo) {
+                let opcion = document.createElement('option')
+                opcion.value = unicosTipo
+                opcion.text = unicosTipo
+                areasSelect.add(opcion)
+            })
+
+            function cargarCategorias() {
+                categoriasSelect.options.length = 1;
+                tallas
+                    .filter(function (talla) {
+                        return talla.tipo == this;
+                    }, areasSelect.value)
+                    .forEach(function (talla) {
+                        let opcion = document.createElement('option')
+                        opcion.value = talla.id
+                        opcion.text = talla.talla
+                        categoriasSelect.add(opcion);
+                    });
+            }
+
+        });
+
+</script>

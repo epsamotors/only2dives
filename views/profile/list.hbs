@@ -1,114 +1,66 @@
+<<<<<<< HEAD
 <a class="d-none nav-link float" href="/cart">
     <i class="fa fa-shopping-bag"></i>
 </a>
 
+=======
+>>>>>>> main
 <div class="container p-4">
     <div class="row">
+        {{#if products}}
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
+        <div class="col-xs-12 col-md-9 col-md-push-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="mx-auto">
 
-                    {{#if products}}
-                    <div class="mb-3">
-                        <div class="rounded-pill clearfix"
-                            style="border: 2px dotted #e1cdb3; text-align:center; center{margin:16px 0;">
-                            <h2 class="textNut">Mis Compras</h2>
-                        </div>
-                    </div>
-                    {{#each products}}
-                    <div class="col-md-3 text-center">
-                        <div class="card mb-4 shadow-sm">
-                            <div class="card-body">
-                                <img src="{{PRODUCTO_URL}}" class="card-img-top" width="100px" height="250px">
-                                <h3 class="card-title text-uppercase">
-                                    {{PRODUCTO_NOMBRE}}
-                                </h3>
-                                <div class="d-grid gap-3">
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#myModalImage{{@index}}">
-                                        Ver Imagen
-                                    </button>
-                                </div>
-                                <br>
-                                <div class="d-grid gap-3">
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#myCommentImage{{@index}}">
-                                        Comentar
-                                    </button>
-                                </div>
+                                <table class="table caption-top">
+                                    <caption>Lista de Productos Comprados</caption>
+                                    <thead class="text-center table-secondary">
+                                        <tr class="card-title text-uppercase">
+                                            <td>Nombre</td>
+                                            <td>Precio</td>
+                                            <td>Cantidad</td>
+                                            <td>Total</td>
+                                            <td>Talla</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        {{#each products}}
+                                        <tr>
+                                            <td>{{PRODUCTO_NOMBRE}}</td>
+                                            <td>{{DETALLEVENTA_PRECIOUNITARIO}} $</td>
+                                            <td>{{DETALLEVENTA_CANTIDAD}} $</td>
+                                            <td>{{DETALLEVENTA_TOTAL}} $</td>
+                                            <td>{{TALLA_NOMBRE}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal fade" id="myModalImage{{@index}}" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        {{PRODUCTO_NOMBRE}}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-
-                                <div class="modal-body">
-                                    <img src="{{PRODUCTO_URL}}" class="card-img-top" width="90px" height="500px">
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade" id="myCommentImage{{@index}}" data-bs-backdrop="static"
-                        data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-success textPurple" id="staticBackdropLabel">
-                                        <i class="fal fa-check-circle"> Comentar '{{PRODUCTO_NOMBRE}}'</i>
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="/profile/comment" method="POST">
-                                        <div class="col-12">
-                                            <textarea name="COMENTARIO_DESCRIPCION" rows="4" class="form-control"
-                                                placeholder="COMENTARIO" style="text-transform:uppercase" required
-                                                autofocus></textarea>
-                                        </div>
-                                        <input type="hidden" name="PRODUCTO_ID" value={{PRODUCTO_ID}}>
-                                        <div class="col-12 text-center">
-                                            <button class="btn btn-warning">
-                                                Aceptar
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    {{/each}}
-                    {{else}}
-                    <div class="row">
-                        <div class="col-md-6 mx-auto">
-                            <div class="card text-center">
-                                <div class="card-body">
-                                    <h3>No has realizado ningun pedido</h3>
-                                    <a href="/shop" class="btn btn-primary m-4">
-                                        Comprar
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{/if}}
-
                 </div>
             </div>
         </div>
+
+        {{else}}
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3>No has realizado ningun pedido</h3>
+                        <a href="/shop" class="btn btn-primary m-4">
+                            Comprar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+
     </div>
 </div>
