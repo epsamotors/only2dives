@@ -92,7 +92,7 @@ module.exports = {
 
         const { producto_id } = req.params;
 
-        const details = await pool.query('SELECT * FROM PRODUCTO, TALLA WHERE TALLA.TALLA_ID = PRODUCTO.TALLA_ID AND PRODUCTO.PRODUCTO_ID= ?', [producto_id]);
+        const details = await pool.query('SELECT * FROM PRODUCTO, TALLA, CATEGORIA WHERE TALLA.TALLA_ID = PRODUCTO.TALLA_ID AND CATEGORIA.CATEGORIA_ID = PRODUCTO.CATEGORIA_ID AND PRODUCTO.PRODUCTO_ID= ?', [producto_id]);
 
         const gallery = await pool.query('SELECT * FROM GALERIA WHERE GALERIA_ESTADO = "ACTIVO" AND GALERIA.PRODUCTO_ID = ?', [producto_id]);
 
@@ -100,11 +100,9 @@ module.exports = {
 
         const commentCount = comments.length;
 
-        const feachaAlta = details[0].PRODUCTO_FECHAALTA.toLocaleDateString('sv-SE');
-
         const recommended = await pool.query('SELECT * FROM PRODUCTO ORDER BY PRODUCTO.PRODUCTO_ID DESC LIMIT 4');
 
-        res.render('store/detail', { detail: details[0], feachaAlta, comments, commentCount, gallery, recommended, count });
+        res.render('store/detail', { detail: details[0], comments, commentCount, gallery, recommended, count });
 
     },
 
@@ -124,7 +122,7 @@ module.exports = {
             }
         } catch {
             req.flash('messageCart', 'Debes iniciar sesion para comprar');
-            res.redirect('/cart');
+            res.redirect(`/detail/${PRODUCTO_ID}`);
         }
     },
 
