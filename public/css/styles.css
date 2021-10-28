@@ -119,6 +119,10 @@ a {
   float: right;
 }
 
+.responsive_movil{
+  display: none;
+}
+
 .color-only2ndvibe {
   color: #8f8f8f;
 }
@@ -276,7 +280,6 @@ select {
 
 .column-login {
   border-left: 1px solid;
-  margin-left: 20px;
 }
 
 .fade:not(.show) {
@@ -293,7 +296,7 @@ select {
 }
 
 img.logo-home {
-  width   : 10%;
+  width   : 120px;
   position: absolute;
   z-index : 100;
 }
@@ -5028,3 +5031,10 @@ h1.thank-you {
   background: #f6416c none repeat scroll 0 0;
   color     : #fff;
 }
+
+.vista-lg-4 {
+  -ms-flex: 0 0 33.333333%;
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+

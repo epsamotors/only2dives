@@ -1,23 +1,20 @@
-<header class="color_bg text-white">
+<nav class="color_bg text-white">
     <div class="container">
-
         <div class="nav-contet">
-            <a href="/shop" class="navbar-brand">
-                <img src="../img/logo.png" class="logo-home" alt="Logo" />
-            </a>
-            <div class="col">
-
+            
+            <div class="col-3">
+                <a href="/shop">
+                    <img src="../img/logo.png" class="logo-home" alt="Logo" />
+                </a>
             </div>
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 py-3">
-                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                {{!-- <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li> --}}
-            </ul>
+            <div class="col-6">
+                <ul class="column-menu col-12 col-md-auto mb-2 text-right mb-md-0 py-3">
+                    <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+                </ul>
+            </div>
 
             {{#if user}}
-            <div class="column-login col-md-3 text-center d-flex py-3">
+            <div class="col-3 column-login py-3">
                 <a class="color-dark nav-link" href="/profile">
                     <i class="fa fa-user" aria-hidden="true"> {{user.PERSONA_NOMBRE}}</i>
                 </a>
@@ -47,7 +44,17 @@
 
         </div>
     </div>
-</header>
+</nav>
+
+
+
+
+
+
+
+
+
+
 
 
 <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

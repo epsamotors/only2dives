@@ -86,6 +86,7 @@
 /* Normal desktop :992px. */
 @media (min-width: 992px) and (max-width: 1169px) {
 
+
   .slider-1 h1 {
     font-size: 30px;
   }
@@ -273,7 +274,19 @@
 /* Tablet desktop :768px. */
 @media (min-width: 768px) and (max-width: 991px) {
 
+  .vista-lg-4 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 
+  .responsive_escritorio{
+    display: none;
+  }
+
+  .responsive_movil{
+    display: block;
+  }
 
   .header-top-left li {
     padding: 18px 8px;
@@ -657,8 +670,16 @@
 
 /* small mobile :320px. */
 @media (max-width: 767px) {
-  .container {
-    width: 300px !important
+
+  .column-menu{
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .vista-md-6 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100% ;
+    max-width: 100% ;
   }
 
   p {
@@ -1448,13 +1469,15 @@
 
 }
 
+/* small mobile :320px. */
+@media (max-width: 320px) {
+  
+}
+
 /* Large Mobile :480px. */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-  .container {
-    width: 450px
-  }
-
-
+ 
+  
 
   .collection-brief {
     right: 50px;
